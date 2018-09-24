@@ -1,9 +1,9 @@
 # Template models in Wordpress
 
-Template models are class methods that are called when a template is rendered. If you have data that you want to be bound to a template each time that template is rendered, a template model can help you organize that logic into a single location.
+Template models are class methods that is executed immediately before WordPress includes the predetermined template file. If you have data that you want to be bound to a template each time that template is rendered, a template model can help you organize that logic into a single location.
 
 ## Usage
-A template model is a class where you can put some complex logic for your templates. You can create a template model by extending the provided `Bechwebb\TemplateModels\TemplateModel`. All public properties will be availible from the template.
+A template model is a class where you can put some complex logic for your templates. You can create a template model by extending the provided `Bechwebb\TemplateModels\TemplateModel`.
 
 ```php
 class HomeTemplateModel extends TemplateModel
@@ -20,7 +20,7 @@ class HomeTemplateModel extends TemplateModel
 }
 ```
 
-Next register your template model to run when wordpress loads the desired template. Template root is theme folder.
+All template models need to be registered to the desired wordpres template.
 ```php
 use Bechwebb\TemplateModels\TemplateModelProvider;
 
@@ -28,7 +28,7 @@ $templateModelProvider = new TemplateModelProvider;
 $templateModelProvider->register('/home.php', \App\TemplateModels\HomeTemplateModel::class);
 ```
 
-Now you can access all public properties in the home.php
+In the template all public properties from the template model is now available.
 ```php
 <?php foreach ($terms as $term) : ?>
     <div class="row <?= $term->active ?>">
@@ -39,16 +39,15 @@ Now you can access all public properties in the home.php
 <?php endforeach; ?>
 ```
 
-You can also use template models when loading template parts.
-
-Create your template model
+### Manually using template models
+You can also manually load a template model from any template and use arguments
 
 ```php
 use Bechwebb\TemplateModels\TemplateModel;
 
 class CalendarSidebarTemplateModel extends TemplateModel
 {
-    public title = '';
+    public $title = '';
     public $posts = [];
 
     public function __construct($title, $post_type)
@@ -64,13 +63,12 @@ class CalendarSidebarTemplateModel extends TemplateModel
 }
 ```
 
-Register your template model
+Register the template model
 ```php
 $templateModelProvider->register('/theme-templates/calendar-sidebar.php', \App\TemplateModels\CalendarSidebarTemplateModel::class);
 ```
 
-Include your template
-
+Use `get_model_template()` to include the template
 ```php
-get_model_template('/theme-templates/calendar-sidebar.php', '');
+get_model_template('/theme-templates/calendar-sidebar.php', 'Sidebar title', 'bf_calendar');
 ```
