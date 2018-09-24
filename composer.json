@@ -1,0 +1,19 @@
+{
+    "name": "bechwebbkonsult/wordpress-template-models",
+    "description": "Template models in Wordpress",
+    "authors": [
+        {
+            "name": "Tobias Rosengren",
+            "email": "tobias@bechwebb.se"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Bechwebb\\TemplateModels\\": "src"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "minimum-stability": "dev"
+}
