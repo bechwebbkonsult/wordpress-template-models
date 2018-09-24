@@ -1,6 +1,7 @@
 {
     "name": "bechwebbkonsult/wordpress-template-models",
     "description": "Template models in Wordpress",
+    "license": "MIT",
     "authors": [
         {
             "name": "Tobias Rosengren",
