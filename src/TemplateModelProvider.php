@@ -13,7 +13,7 @@ class TemplateModelProvider
     }
 
 
-    public function map($templates, $callback)
+    public function register($templates, $callback)
     {
         foreach ((array) $templates as $view) {
             $this->models[$view] = $callback;

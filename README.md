@@ -25,7 +25,7 @@ Next register your template model to run when wordpress loads the desired templa
 use Bechwebb\TemplateModels\TemplateModelProvider;
 
 $templateModelProvider = new TemplateModelProvider;
-$templateModelProvider->map('/home.php', \App\TemplateModels\HomeTemplateModel::class);
+$templateModelProvider->register('/home.php', \App\TemplateModels\HomeTemplateModel::class);
 ```
 
 Now you can access all public properties in the home.php
@@ -66,7 +66,7 @@ class CalendarSidebarTemplateModel extends TemplateModel
 
 Register your template model
 ```php
-$templateModelProvider->map('/theme-templates/calendar-sidebar.php', \App\TemplateModels\CalendarSidebarTemplateModel::class);
+$templateModelProvider->register('/theme-templates/calendar-sidebar.php', \App\TemplateModels\CalendarSidebarTemplateModel::class);
 ```
 
 Include your template
